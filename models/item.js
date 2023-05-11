@@ -21,6 +21,10 @@ const itemSchema = new Schema(
       ref: "User",
       required: true,
     },
+    dateLost: {
+      type: Date,
+      required: true,
+    },
   },
   { timestamps: true }
 );

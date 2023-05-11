@@ -5,6 +5,7 @@ import "./App.css";
 import AuthPage from "../AuthPage/AuthPage";
 import * as locationAPI from "../../utilities/location-api";
 import NavBar from "../../components/NavBar/NavBar";
+import NewItemForm from "../../components/NewItemForm/NewItemForm";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -17,18 +18,19 @@ export default function App() {
     }
     getAllLocations();
   }, []);
-// console.log(locations[0]?.name)
+  // console.log(locations[0]?.name)
   return (
     <main className="App">
       {user ? (
         <>
           <NavBar user={user} setUser={setUser} />
           <h3>{locations[0]?.name}</h3>
-          {/* <Routes> */}
+
+          <Routes>
             {/* Route components in here */}
-            {/* <Route path="/orders/new" /> */}
+            <Route path="/items/new" element={<NewItemForm />} />
             {/* <Route path="/orders" /> */}
-          {/* </Routes> */}
+          </Routes>
         </>
       ) : (
         <AuthPage setUser={setUser} />
