@@ -1,7 +1,7 @@
 require("dotenv").config();
 require("./config/database");
 
-const Location = require("./models/beaches");
+const Location = require("./models/location");
 
 (async function () {
   await Location.deleteMany({});
