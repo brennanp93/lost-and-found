@@ -1,4 +1,15 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 export default function NewItemForm() {
+  const navigate = useNavigate();
+  const [newItem, setNewItem] = useState({
+    name: "",
+    description: "",
+    location: "",
+    user: "",
+    dateLost: "",
+  });
   return (
     <>
       <div>
@@ -29,14 +40,7 @@ export default function NewItemForm() {
           </div>
           <h5>Date Lost:</h5>
           <div>
-            <input
-              type="date"
-              name="dateApplied"
-              value="VALUE"
-              onChange="ONCHANGE"
-              required
-              autoComplete="off"
-            />
+            <input type="date" name="dateApplied" value="VALUE" onChange="ONCHANGE" required autoComplete="off" />
           </div>
           <h5>Item Description:</h5>
           <div>

@@ -1,3 +1,31 @@
 .App {
   text-align: center;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+.container {
+  display: flex;
+  width: 80vw;
+  border: solid red 1px;
+  border-radius: 10px;
+  overflow: none;
+}
+
+.beach-panel {
+  height: 80vh;
+  border: solid black 1px;
+  border-radius: 25px;
+  margin: 10px;
+  width: 10%;
+}
