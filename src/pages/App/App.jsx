@@ -34,7 +34,7 @@ export default function App() {
 
           <Routes>
             {/* Route components in here */}
-            <Route path="/items/new" element={<NewItemForm locations={locations}/>} />
+            <Route path="/items/new" element={<NewItemForm locations={locations} user={user}/>} />
             {/* <Route path="/orders" /> */}
           </Routes>
         </>

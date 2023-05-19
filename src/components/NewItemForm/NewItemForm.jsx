@@ -1,19 +1,26 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function NewItemForm({ locations }) {
+export default function NewItemForm({ locations, user }) {
   const navigate = useNavigate();
   const [newItem, setNewItem] = useState({
     name: "",
     description: "",
     location: "",
-    user: "",
+    user: user?._id,
     dateLost: "",
   });
-  console.log(locations);
-  function handleSubmit() {}
+  // console.log(user)
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
 
-  function handleChange() {}
+  function handleChange(evt) {
+    const formFields = { ...newItem, [evt.target.name]: evt.target.value };
+    setNewItem(formFields);
+  }
+
+  console.log(newItem);
   return (
     <>
       <div className="form-box">
@@ -46,13 +53,15 @@ export default function NewItemForm({ locations }) {
             autoComplete="off"
           />
           <label htmlFor="">Location Lost:</label>
-          <select type="datalist">
+          <select type="datalist" onChange={handleChange} name="location">
+            <option value="DEFAULT"> -- select an option -- </option>
             {locations.map((location) => (
-              <option key={location?._id} value={location?.name}>
+              <option key={location?._id} value={location?._id}>
                 {location?.name}
               </option>
             ))}
           </select>
+          <button type="submit">Submit</button>
         </form>
       </div>
     </>
