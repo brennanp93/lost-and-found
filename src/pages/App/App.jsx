@@ -21,11 +21,13 @@ export default function App() {
   useEffect(function () {
     async function getAllLocations() {
       const allLocations = await locationAPI.getAll();
+      const allLostItems = await itemAPI.getAll()
       setLocations(allLocations);
+      setLostItems(allLostItems)
     }
     getAllLocations();
   }, []);
-  // console.log(locations[0]?.name)
+  console.log(lostItems)
   return (
     <main className="App">
       {user ? (

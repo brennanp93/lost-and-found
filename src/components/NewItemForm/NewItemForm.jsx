@@ -6,7 +6,7 @@ export default function NewItemForm({ locations, user, addLostItem }) {
   const [newItem, setNewItem] = useState({
     name: "",
     description: "",
-    location: "",
+    location: "-- select an option --",
     user: user?._id,
     dateLost: "",
   });
@@ -17,7 +17,7 @@ export default function NewItemForm({ locations, user, addLostItem }) {
     setNewItem({
       name: "",
       description: "",
-      location: "",
+      location: "-- select an option --",
       user: user?._id,
       dateLost: "",
     });
