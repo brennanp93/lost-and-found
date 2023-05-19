@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function NewItemForm() {
+export default function NewItemForm({ locations }) {
   const navigate = useNavigate();
   const [newItem, setNewItem] = useState({
     name: "",
@@ -10,55 +10,49 @@ export default function NewItemForm() {
     user: "",
     dateLost: "",
   });
+  console.log(locations);
+  function handleSubmit() {}
+
+  function handleChange() {}
   return (
     <>
-      <div>
-        <form onSubmit={""}>
-          <h5>Item Name:</h5>
-          <div>
-            <input
-              type="text"
-              name="companyName"
-              value="VALUE"
-              onChange="ONCHANGE"
-              required
-              autoComplete="off"
-              placeholder="Company Name"
-            />
-          </div>
-          <h5>Item Description</h5>
-          <div>
-            <input
-              type="text"
-              name="jobTitle"
-              value="VALUE"
-              onChange="ONCHANGE"
-              required
-              autoComplete="off"
-              placeholder="Job Title"
-            />
-          </div>
-          <h5>Date Lost:</h5>
-          <div>
-            <input type="date" name="dateApplied" value="VALUE" onChange="ONCHANGE" required autoComplete="off" />
-          </div>
-          <h5>Item Description:</h5>
-          <div>
-            <textarea
-              type="text"
-              name="jobDescription"
-              value="VALUE"
-              onChange="ONCHANGE"
-              autoComplete="off"
-              placeholder="Job Description"
-              cols={40}
-              rows={10}
-            />
-          </div>
-          <button type="submit">
-            <img src="./add-new.png" alt="" />
-            Submit
-          </button>
+      <div className="form-box">
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="">Item Name</label>
+          <input
+            type="text"
+            name="name"
+            value={newItem.name}
+            onChange={handleChange}
+            required
+            autoComplete="off"
+          />
+          <label htmlFor="">Item Description</label>
+          <input
+            type="text"
+            name="description"
+            value={newItem.description}
+            onChange={handleChange}
+            required
+            autoComplete="off"
+          />
+          <label htmlFor="">Date Lost</label>
+          <input
+            type="date"
+            name="dateLost"
+            value={newItem.dateLost}
+            onChange={handleChange}
+            required
+            autoComplete="off"
+          />
+          <label htmlFor="">Location Lost:</label>
+          <select type="datalist">
+            {locations.map((location) => (
+              <option key={location?._id} value={location?.name}>
+                {location?.name}
+              </option>
+            ))}
+          </select>
         </form>
       </div>
     </>

@@ -24,17 +24,17 @@ export default function App() {
       {user ? (
         <>
           <NavBar user={user} setUser={setUser} />
-          <div className="container">
+          {/* <div className="container">
             {locations.map((location) => (
               <div className="beach-panel">
                 <h3>{location.name}</h3>
               </div>
             ))}
-          </div>
+          </div> */}
 
           <Routes>
             {/* Route components in here */}
-            <Route path="/items/new" element={<NewItemForm />} />
+            <Route path="/items/new" element={<NewItemForm locations={locations}/>} />
             {/* <Route path="/orders" /> */}
           </Routes>
         </>

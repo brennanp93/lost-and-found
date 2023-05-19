@@ -29,3 +29,9 @@ body {
   margin: 10px;
   width: 10%;
 }
+
+
+form{
+  display: flex;
+  flex-direction: column;
+}
