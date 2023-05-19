@@ -7,27 +7,35 @@ import * as locationAPI from "../../utilities/location-api";
 import * as itemAPI from "../../utilities/item-api";
 import NavBar from "../../components/NavBar/NavBar";
 import NewItemForm from "../../components/NewItemForm/NewItemForm";
+import LostItems from "../../components/LostItems/LostItems";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [locations, setLocations] = useState([]);
   const [lostItems, setLostItems] = useState([]);
+  const [specificBeachItems, setSpecificBeachItems] = useState([]);
 
   async function addLostItem(itemData) {
     const newLostItemData = await itemAPI.create(itemData);
     setLostItems(newLostItemData);
   }
 
+  async function getItemsByBeach(beachObj, id) {
+    console.log(id,"app.jsx page")
+    const itemsByBeach = await itemAPI.singleBeach(beachObj, id);
+    setSpecificBeachItems(itemsByBeach)
+  }
   useEffect(function () {
     async function getAllLocations() {
       const allLocations = await locationAPI.getAll();
-      const allLostItems = await itemAPI.getAll()
+      const allLostItems = await itemAPI.getAll();
       setLocations(allLocations);
-      setLostItems(allLostItems)
+      setLostItems(allLostItems);
     }
     getAllLocations();
   }, []);
-  console.log(lostItems)
+  // console.log(locations)
+
   return (
     <main className="App">
       {user ? (
@@ -43,10 +51,23 @@ export default function App() {
                   locations={locations}
                   user={user}
                   addLostItem={addLostItem}
+                  lostItems={lostItems}
                 />
               }
             />
-            {/* <Route path="/orders" /> */}
+            <Route
+              path="/lostitems"
+              element={
+                <LostItems
+                  locations={locations}
+                  user={user}
+                  addLostItem={addLostItem}
+                  lostItems={lostItems}
+                  getItemsByBeach={getItemsByBeach}
+                  specificBeachItems={specificBeachItems}
+                />
+              }
+            />
           </Routes>
         </>
       ) : (

@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function NewItemForm({ locations, user, addLostItem }) {
+export default function NewItemForm({
+  locations,
+  user,
+  addLostItem,
+  lostItems,
+}) {
   const navigate = useNavigate();
   const [newItem, setNewItem] = useState({
     name: "",
@@ -28,7 +33,6 @@ export default function NewItemForm({ locations, user, addLostItem }) {
     setNewItem(formFields);
   }
 
-  // console.log(newItem);
   return (
     <>
       <div className="form-box">
@@ -72,6 +76,21 @@ export default function NewItemForm({ locations, user, addLostItem }) {
           <button type="submit">Submit</button>
         </form>
       </div>
+      {/* <div>
+        <h3>Hello</h3>
+        <form action="">
+          <label htmlFor="">Location</label>
+          <select type="datalist" onChange={handleChange} name="location">
+            <option value="DEFAULT"> -- select an option -- </option>
+            {locations.map((location) => (
+              <option key={location?._id} value={location?._id}>
+                {location?.name}
+              </option>
+            ))}
+          </select>
+          <button type="submit">Submit</button>
+        </form>
+      </div> */}
     </>
   );
 }

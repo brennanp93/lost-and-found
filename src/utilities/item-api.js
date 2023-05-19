@@ -8,3 +8,6 @@ export async function getAll() {
 export async function create(itemData) {
   return sendRequest(BASE_URL, "POST", itemData);
 }
+export async function singleBeach(beachObj, id) {
+  return sendRequest(`${BASE_URL}/${id}/beach`,);
+}

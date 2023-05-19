@@ -11,8 +11,8 @@ export default function NavBar({ user, setUser }) {
     <>
       <header>
         <nav>
-          {/* <Link to="/orders">Order History</Link> */}
-          {/* &nbsp; | &nbsp; */}
+          <Link to="/lostitems">Lost Items</Link>
+          &nbsp; | &nbsp;
           <Link to="/items/new">Post a lost or found item</Link>
           <p></p>
           &nbsp;&nbsp;
