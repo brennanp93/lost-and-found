@@ -6,6 +6,7 @@ export default function LostItems({
   locations,
   getItemsByBeach,
   specificBeachItems,
+  filterDataFunction,
 }) {
   const [beachObj, setBeachObj] = useState([{}]);
   const [filterObj, setFilterObj] = useState({
@@ -27,9 +28,17 @@ export default function LostItems({
 
   // console.log(cityNames)
 
+  function handleStateChange(e) {
+    const selectState = e.target.value;
+    filterDataFunction(selectState);
+    console.log(selectState)
+  }
+
   function handleChange(evt) {
     const searchObj = { ...filterObj, [evt.target.name]: evt.target.value };
-    setFilterObj(searchObj);
+    // console.log(searchObj,"SOOOO")
+    filterDataFunction(searchObj);
+    // setFilterObj(searchObj);
     const selectedBeach = evt.target.value;
     const findBeach = locations.find((beach) => beach?.name === selectedBeach);
     setBeachObj(findBeach);
@@ -42,7 +51,7 @@ export default function LostItems({
         <h3>Hello</h3>
         <form onSubmit={handleSubmit}>
           <label htmlFor="">State</label>
-          <select type="datalist" onChange={handleChange} name="state">
+          <select type="datalist" onChange={handleStateChange} name="state">
             <option value=""> -- select an option -- </option>
             {staticStates.map((state, idx) => (
               <option key={idx} value={state}>

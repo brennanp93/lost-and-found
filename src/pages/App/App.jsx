@@ -20,21 +20,27 @@ export default function App() {
     setLostItems(newLostItemData);
   }
 
+  async function filterDataFunction(filterObj) {
+    console.log(filterObj, "returnedData");
+    const returnedData = await locationAPI.filter(filterObj);
+    setLocations(returnedData);
+  }
+
   async function getItemsByBeach(beachObj, id) {
-    console.log(id,"app.jsx page")
+    // console.log(id, "app.jsx page");
     const itemsByBeach = await itemAPI.singleBeach(beachObj, id);
-    setSpecificBeachItems(itemsByBeach)
+    setSpecificBeachItems(itemsByBeach);
   }
   useEffect(function () {
     async function getAllLocations() {
-      const allLocations = await locationAPI.getAll();
+      // const allLocations = await locationAPI.getAll();
       const allLostItems = await itemAPI.getAll();
-      setLocations(allLocations);
+      // setLocations(allLocations);
       setLostItems(allLostItems);
     }
     getAllLocations();
   }, []);
-  // console.log(locations)
+  console.log(locations)
 
   return (
     <main className="App">
@@ -65,6 +71,7 @@ export default function App() {
                   lostItems={lostItems}
                   getItemsByBeach={getItemsByBeach}
                   specificBeachItems={specificBeachItems}
+                  filterDataFunction={filterDataFunction}
                 />
               }
             />
