@@ -10,29 +10,20 @@ export default function LostItems({
   filterDataFunction,
 }) {
   const [beachObj, setBeachObj] = useState([{}]);
-  const [filterObj, setFilterObj] = useState({
-    state: "",
-    county: "",
-    city: "",
-    name: "",
-  });
-
   const [state, setState] = useState({ state: "" });
-  const [county, setCounty] = useState({ county: null });
+  const [county, setCounty] = useState({ county: "" });
   const [city, setCity] = useState({ city: "" });
+  const [items, setItems] = useState([specificBeachItems])
 
-  let testFilterObject = {
-    state: "",
-    county: "",
-    city: "",
-    name: "",
-  };
-
-  useEffect(() => {}, [filterObj]);
+  console.log(city,state,county);
 
   function handleSubmit(evt) {
     evt.preventDefault();
     getItemsByBeach(beachObj, beachObj._id);
+    setCity({city:""})
+    setState({state:""})
+    setCounty({county:""})
+    setItems(specificBeachItems)
   }
 
   function handleStateChange(evt) {
@@ -51,18 +42,15 @@ export default function LostItems({
   function handleCityChange(evt) {
     evt.preventDefault();
     setCity({ city: evt.target.value });
-    filterDataFunction(state, county, {city: evt.preventDefault})
+    filterDataFunction(state, county, { city: evt.target.value });
   }
   function handleChange(evt) {
-    const searchObj = { ...filterObj, [evt.target.name]: evt.target.value };
-    // console.log(searchObj,"SOOOO")
-    // filterDataFunction(searchObj);
-    // setFilterObj(searchObj);
-    const selectedBeach = evt.target.value;
-    const findBeach = locations.find((beach) => beach?.name === selectedBeach);
+    const findBeach = locations.find(
+      (beach) => beach?.name === evt.target.value
+    );
     setBeachObj(findBeach);
   }
-  let stateNames = [...new Set(locations.map((beach) => beach?.state))];
+  // let stateNames = [...new Set(locations.map((beach) => beach?.state))];
   let countyNames = [...new Set(locations.map((beach) => beach?.county))];
   let cityNames = [...new Set(locations.map((beach) => beach?.city))];
   return (
@@ -82,12 +70,20 @@ export default function LostItems({
           </select>
           <label htmlFor="">County</label>
           <select type="datalist" onChange={handleCountyChange} name="county">
-            <option value="DEFAULT"> -- select an option -- </option>
-            {countyNames.map((county, idx) => (
-              <option key={idx} value={county}>
-                {county}
+            {countyNames.length === 1 ? (
+              <option value={countyNames[0]} selected>
+                {countyNames[0]}
               </option>
-            ))}
+            ) : (
+              <>
+                <option value="DEFAULT"> -- select an option -- </option>
+                {countyNames.map((county, idx) => (
+                  <option key={idx} value={county}>
+                    {county}
+                  </option>
+                ))}
+              </>
+            )}
           </select>
           <label htmlFor="">City</label>
           <select type="datalist" onChange={handleCityChange} name="city">

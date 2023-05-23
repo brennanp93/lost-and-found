@@ -7,6 +7,6 @@ export async function getAll() {
 
 export async function filter(state, county, city){
   console.log(state, county, "API")
-  // console.log(`${BASE_URL}/${filterObj.state}/${filterObj.county}/${filterObj.city}`)
+  console.log(`${BASE_URL}/${state.state}/${county?.county}/${city?.city}` )
   return sendRequest(`${BASE_URL}/${state.state}/${county?.county}/${city?.city}` )
 }
