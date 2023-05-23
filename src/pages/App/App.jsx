@@ -12,6 +12,7 @@ import LostItems from "../../components/LostItems/LostItems";
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [locations, setLocations] = useState([]);
+  const [filterLocations, setFilterLocations] = useState([]);
   const [lostItems, setLostItems] = useState([]);
   const [specificBeachItems, setSpecificBeachItems] = useState([]);
 
@@ -20,9 +21,10 @@ export default function App() {
     setLostItems(newLostItemData);
   }
 
-  async function filterDataFunction(filterObj) {
-    console.log(filterObj, "returnedData");
-    const returnedData = await locationAPI.filter(filterObj);
+  async function filterDataFunction(state, county, city) {
+    console.log(state, county, "app.jsx filter obj")
+    const returnedData = await locationAPI.filter(state, county, city);
+    // console.log(returnedData, "returnedData");
     setLocations(returnedData);
   }
 
@@ -72,6 +74,7 @@ export default function App() {
                   getItemsByBeach={getItemsByBeach}
                   specificBeachItems={specificBeachItems}
                   filterDataFunction={filterDataFunction}
+                  filterLocations={filterLocations}
                 />
               }
             />

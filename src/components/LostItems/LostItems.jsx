@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import FilterForm from "../FilterForm";
 import { staticStates } from "../../data.js";
+import { filter } from "../../utilities/location-api";
 
 export default function LostItems({
   locations,
@@ -10,40 +11,60 @@ export default function LostItems({
 }) {
   const [beachObj, setBeachObj] = useState([{}]);
   const [filterObj, setFilterObj] = useState({
-    state: null,
-    county: null,
-    city: null,
-    name: null,
+    state: "",
+    county: "",
+    city: "",
+    name: "",
   });
 
-  console.log(filterObj);
+  const [state, setState] = useState({ state: "" });
+  const [county, setCounty] = useState({ county: null });
+  const [city, setCity] = useState({ city: "" });
+
+  let testFilterObject = {
+    state: "",
+    county: "",
+    city: "",
+    name: "",
+  };
+
+  useEffect(() => {}, [filterObj]);
+
   function handleSubmit(evt) {
     evt.preventDefault();
     getItemsByBeach(beachObj, beachObj._id);
   }
 
-  let stateNames = [...new Set(locations.map((beach) => beach?.state))];
-  let countyNames = [...new Set(locations.map((beach) => beach?.county))];
-  let cityNames = [...new Set(locations.map((beach) => beach?.city))];
-
-  // console.log(cityNames)
-
-  function handleStateChange(e) {
-    const selectState = e.target.value;
-    filterDataFunction(selectState);
-    console.log(selectState)
+  function handleStateChange(evt) {
+    evt.preventDefault();
+    setState({ state: evt.target.value });
+    filterDataFunction({ state: evt.target.value });
   }
 
+  function handleCountyChange(evt) {
+    evt.preventDefault();
+    setCounty({ county: evt.target.value });
+    console.log(county);
+    filterDataFunction(state, { county: evt.target.value });
+  }
+
+  function handleCityChange(evt) {
+    evt.preventDefault();
+    setCity({ city: evt.target.value });
+    filterDataFunction(state, county, {city: evt.preventDefault})
+  }
   function handleChange(evt) {
     const searchObj = { ...filterObj, [evt.target.name]: evt.target.value };
     // console.log(searchObj,"SOOOO")
-    filterDataFunction(searchObj);
+    // filterDataFunction(searchObj);
     // setFilterObj(searchObj);
     const selectedBeach = evt.target.value;
     const findBeach = locations.find((beach) => beach?.name === selectedBeach);
     setBeachObj(findBeach);
   }
-
+  let stateNames = [...new Set(locations.map((beach) => beach?.state))];
+  let countyNames = [...new Set(locations.map((beach) => beach?.county))];
+  let cityNames = [...new Set(locations.map((beach) => beach?.city))];
   return (
     <>
       <FilterForm />
@@ -60,7 +81,7 @@ export default function LostItems({
             ))}
           </select>
           <label htmlFor="">County</label>
-          <select type="datalist" onChange={handleChange} name="county">
+          <select type="datalist" onChange={handleCountyChange} name="county">
             <option value="DEFAULT"> -- select an option -- </option>
             {countyNames.map((county, idx) => (
               <option key={idx} value={county}>
@@ -69,7 +90,7 @@ export default function LostItems({
             ))}
           </select>
           <label htmlFor="">City</label>
-          <select type="datalist" onChange={handleChange} name="city">
+          <select type="datalist" onChange={handleCityChange} name="city">
             <option value="DEFAULT"> -- select an option -- </option>
             {cityNames.map((city, idx) => (
               <option key={city} value={city}>
