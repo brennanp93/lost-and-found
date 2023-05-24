@@ -13,17 +13,17 @@ export default function LostItems({
   const [state, setState] = useState({ state: "" });
   const [county, setCounty] = useState({ county: "" });
   const [city, setCity] = useState({ city: "" });
-  const [items, setItems] = useState([specificBeachItems])
+  const [items, setItems] = useState([specificBeachItems]);
 
-  console.log(city,state,county);
+  console.log(city, state, county);
 
   function handleSubmit(evt) {
     evt.preventDefault();
     getItemsByBeach(beachObj, beachObj._id);
-    setCity({city:""})
-    setState({state:""})
-    setCounty({county:""})
-    setItems(specificBeachItems)
+    setCity({ city: "" });
+    setState({ state: "" });
+    setCounty({ county: "" });
+    setItems(specificBeachItems);
   }
 
   function handleStateChange(evt) {
@@ -48,6 +48,7 @@ export default function LostItems({
     const findBeach = locations.find(
       (beach) => beach?.name === evt.target.value
     );
+    console.log(findBeach, "FB");
     setBeachObj(findBeach);
   }
   // let stateNames = [...new Set(locations.map((beach) => beach?.state))];
@@ -87,13 +88,22 @@ export default function LostItems({
           </select>
           <label htmlFor="">City</label>
           <select type="datalist" onChange={handleCityChange} name="city">
-            <option value="DEFAULT"> -- select an option -- </option>
-            {cityNames.map((city, idx) => (
-              <option key={city} value={city}>
-                {city}
+            {cityNames.length === 1 ? (
+              <option value={cityNames[0]} selected>
+                {cityNames[0]}
               </option>
-            ))}
+            ) : (
+              <>
+                <option value="DEFAULT"> -- select an option -- </option>
+                {cityNames.map((city, idx) => (
+                  <option key={idx} value={city}>
+                    {city}
+                  </option>
+                ))}
+              </>
+            )}
           </select>
+
           <label htmlFor="">Beach</label>
           <select type="datalist" onChange={handleChange} name="name">
             <option value="DEFAULT"> -- select an option -- </option>
@@ -107,9 +117,13 @@ export default function LostItems({
         </form>
       </div>
       <div>
-        {specificBeachItems.map((itemObj, idx) => (
-          <p key={itemObj?._id}>{itemObj?.name}</p>
-        ))}
+        {specificBeachItems.length === 0 ? (
+          <p>No lost items</p>
+        ) : (
+          specificBeachItems.map((itemObj, idx) => (
+            <p key={itemObj?._id}>{itemObj?.name}</p>
+          ))
+        )}
       </div>
     </>
   );
