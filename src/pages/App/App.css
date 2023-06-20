@@ -51,6 +51,23 @@ form{
   border: solid black 1px;
 }
 
-.location-tile:hover{
+.location-tile:hover,.item-tile:hover{
   background-color: lightblue;
+}
+
+.items-container{
+  border: solid black 1px;
+  display: grid;
+  grid-template-rows: repeat(auto,1fr);
+  grid-template-columns: repeat(auto,1fr);
+}
+
+.item-tile{
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  border: solid black 1px;
 }

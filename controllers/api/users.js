@@ -5,6 +5,7 @@ const User = require('../../models/user');
 module.exports = {
   create,
   login,
+  index
 
 };
 
@@ -31,6 +32,11 @@ async function login(req, res) {
   } catch (err) {
     res.status(400).json('Bad Credentials');
   }
+}
+
+async function index(req, res) {
+  const allItems = await User.find({});
+  res.json(allItems);
 }
 
 /*--- Helper Functions --*/
