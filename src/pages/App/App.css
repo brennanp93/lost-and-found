@@ -35,3 +35,22 @@ form{
   display: flex;
   flex-direction: column;
 }
+
+.location-container{
+  border: solid black 1px;
+  display: grid;
+  grid-template-rows: repeat(4,1fr);
+  grid-template-columns: repeat(5,1fr);
+}
+.location-tile{
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  border: solid black 1px;
+}
+
+.location-tile:hover{
+  background-color: lightblue;
+}

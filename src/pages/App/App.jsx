@@ -21,12 +21,12 @@ export default function App() {
     setLostItems(newLostItemData);
   }
 
-  async function filterDataFunction(state, county, city) {
-    console.log(state, county, "app.jsx filter obj")
-    const returnedData = await locationAPI.filter(state, county, city);
-    // console.log(returnedData, "returnedData");
-    setLocations(returnedData);
-  }
+  // async function filterDataFunction(state, county, city) {
+  //   console.log(state, county, "app.jsx filter obj")
+  //   const returnedData = await locationAPI.filter(state, county, city);
+  //   // console.log(returnedData, "returnedData");
+  //   setLocations(returnedData);
+  // }
 
   async function getItemsByBeach(beachObj, id) {
     // console.log(id, "app.jsx page");
@@ -35,14 +35,14 @@ export default function App() {
   }
   useEffect(function () {
     async function getAllLocations() {
-      // const allLocations = await locationAPI.getAll();
+      const allLocations = await locationAPI.getAll();
       const allLostItems = await itemAPI.getAll();
-      // setLocations(allLocations);
+      setLocations(allLocations);
       setLostItems(allLostItems);
     }
     getAllLocations();
   }, []);
-  console.log(locations)
+  console.log(lostItems)
 
   return (
     <main className="App">
@@ -73,8 +73,8 @@ export default function App() {
                   lostItems={lostItems}
                   getItemsByBeach={getItemsByBeach}
                   specificBeachItems={specificBeachItems}
-                  filterDataFunction={filterDataFunction}
-                  filterLocations={filterLocations}
+                  // filterDataFunction={filterDataFunction}
+                  // filterLocations={filterLocations}
                 />
               }
             />
