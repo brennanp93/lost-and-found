@@ -9,9 +9,6 @@ export default function OneLocation({ locations, lostItems, allUsers }) {
     (beachItem) => beachItem?.location === id
   );
 
-  
-  
-  console.log(allUsers)
 
   return (
     <>

@@ -17,7 +17,7 @@ export default function LostItems({
   const [city, setCity] = useState({ city: "" });
   const [items, setItems] = useState([specificBeachItems]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   // console.log(specificBeachItems);
 
   function handleSubmit(evt) {
@@ -38,13 +38,20 @@ export default function LostItems({
 
   return (
     <>
-      <h2>Locations</h2>
-      <div className="location-container">
-        {locations.map((location) => (
-          <div className="location-tile" onClick={()=>navigate(`/locations/${location?._id}/singlelocation`)}>
-            <div>{location?.name}</div>
-          </div>
-        ))}
+      <div className="locations-page">
+        <h2>Locations</h2>
+        <div className="location-container">
+          {locations.map((location) => (
+            <div
+              className="location-tile"
+              onClick={() =>
+                navigate(`/locations/${location?._id}/singlelocation`)
+              }
+            >
+              <div>{location?.name}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
