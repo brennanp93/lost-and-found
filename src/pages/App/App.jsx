@@ -8,6 +8,7 @@ import * as itemAPI from "../../utilities/item-api";
 import NavBar from "../../components/NavBar/NavBar";
 import NewItemForm from "../../components/NewItemForm/NewItemForm";
 import LostItems from "../../components/LostItems/LostItems";
+import OneLocation from "../../components/OneLocation";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -42,7 +43,7 @@ export default function App() {
     }
     getAllLocations();
   }, []);
-  console.log(lostItems)
+  // console.log(lostItems);
 
   return (
     <main className="App">
@@ -64,7 +65,7 @@ export default function App() {
               }
             />
             <Route
-              path="/lostitems"
+              path="/locations"
               element={
                 <LostItems
                   locations={locations}
@@ -76,6 +77,12 @@ export default function App() {
                   // filterDataFunction={filterDataFunction}
                   // filterLocations={filterLocations}
                 />
+              }
+            />
+            <Route
+              path="/locations/:id/singlelocation"
+              element={
+                <OneLocation locations={locations} lostItems={lostItems} />
               }
             />
           </Routes>

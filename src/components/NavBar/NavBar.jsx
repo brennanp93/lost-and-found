@@ -11,7 +11,7 @@ export default function NavBar({ user, setUser }) {
     <>
       <header>
         <nav>
-          <Link to="/lostitems">Lost Items</Link>
+          <Link to="/locations">Lost Items</Link>
           &nbsp; | &nbsp;
           <Link to="/items/new">Post a lost or found item</Link>
           <p></p>
@@ -22,7 +22,7 @@ export default function NavBar({ user, setUser }) {
             Log Out
           </Link>
         </nav>
-        <h4>Lost And Found</h4>
+        {/* <h4>Lost And Found</h4> */}
       </header>
     </>
   );

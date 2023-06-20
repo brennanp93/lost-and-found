@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+
 import FilterForm from "../FilterForm";
 import { staticStates } from "../../data.js";
 import { filter } from "../../utilities/location-api";
+import { useParams, useNavigate } from "react-router-dom";
 
 export default function LostItems({
   locations,
@@ -15,6 +17,7 @@ export default function LostItems({
   const [city, setCity] = useState({ city: "" });
   const [items, setItems] = useState([specificBeachItems]);
 
+  const navigate = useNavigate()
   // console.log(specificBeachItems);
 
   function handleSubmit(evt) {
@@ -25,8 +28,8 @@ export default function LostItems({
     setCounty({ county: "" });
     setItems(specificBeachItems);
   }
-  console.log(lostItems);
-  console.log(locations);
+  // console.log(lostItems);
+  // console.log(locations);
 
   function handleSelectBeach(beach, id) {
     // const findBeach = locations.find((beach) => beach?.name === selectedBeach);
@@ -35,11 +38,11 @@ export default function LostItems({
 
   return (
     <>
-      <h2>lost items</h2>
+      <h2>Locations</h2>
       <div className="location-container">
         {locations.map((location) => (
-          <div className="location-tile">
-            <div onClick={()=> handleSelectBeach(location, location?.id)}>{location?.name}</div>
+          <div className="location-tile" onClick={()=>navigate(`/locations/${location?._id}/singlelocation`)}>
+            <div>{location?.name}</div>
           </div>
         ))}
       </div>
