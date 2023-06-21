@@ -43,12 +43,13 @@ export default function LostItems({
         <div className="location-container">
           {locations.map((location) => (
             <div
+              key={location?._id}
               className="location-tile"
               onClick={() =>
                 navigate(`/locations/${location?._id}/singlelocation`)
               }
             >
-              <div>{location?.name}</div>
+              <div key={location?._id}>{location?.name}</div>
             </div>
           ))}
         </div>
